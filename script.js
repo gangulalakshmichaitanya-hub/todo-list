@@ -191,6 +191,16 @@
   // ==========================================================================
 
   /**
+   * Convert Date object to YYYY-MM-DD in local time
+   */
+  function formatISODateLocal(date) {
+    const y = date.getFullYear();
+    const m = String(date.getMonth() + 1).padStart(2, '0');
+    const d = String(date.getDate()).padStart(2, '0');
+    return `${y}-${m}-${d}`;
+  }
+
+  /**
    * Generate default realistic college tasks for initial load
    */
   function getDefaultTasks() {
@@ -199,17 +209,17 @@
     // Tomorrow for assignment
     const tomorrow = new Date(today);
     tomorrow.setDate(tomorrow.getDate() + 1);
-    const tomorrowStr = tomorrow.toISOString().split('T')[0];
+    const tomorrowStr = formatISODateLocal(tomorrow);
 
     // Yesterday for overdue demonstration
     const yesterday = new Date(today);
     yesterday.setDate(yesterday.getDate() - 1);
-    const yesterdayStr = yesterday.toISOString().split('T')[0];
+    const yesterdayStr = formatISODateLocal(yesterday);
 
     // 4 days ahead for project presentation
     const nextWeek = new Date(today);
     nextWeek.setDate(nextWeek.getDate() + 4);
-    const nextWeekStr = nextWeek.toISOString().split('T')[0];
+    const nextWeekStr = formatISODateLocal(nextWeek);
 
     return [
       {
